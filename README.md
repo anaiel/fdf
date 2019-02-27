@@ -24,4 +24,4 @@ Compile the project using `make`, then you can try with any of the maps in the `
 ## Authors
 
 * **Anaëlle Leclabart** - [anaiel](https://github.com/anaiel)
-* **[Xeska]**(https://github.com/xeska)
+* **[Xeska](https://github.com/xeska)**
