@@ -3,27 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrigalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 10:27:43 by dtrigalo          #+#    #+#             */
-/*   Updated: 2018/12/04 19:27:26 by anleclab         ###   ########.fr       */
+/*   Created: 2018/11/07 17:46:36 by anleclab          #+#    #+#             */
+/*   Updated: 2019/04/04 12:07:40 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
+/*
+** Returns a new string which contains len characters from the original string
+** starting from index start.
+*/
 char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	char	*str;
+	char	*res;
 
-	if (!s)
+	if (!(res = ft_strnew(len)))
 		return (NULL);
-	if (!(str = (char *)malloc(sizeof(char) * (len + 1))))
-		return (NULL);
-	while (start--)
-		s++;
-	ft_strncpy(str, s, len);
-	str[len] = '\0';
-	return (str);
+	s += start;
+	ft_strncpy(res, s, len);
+	return (res);
 }

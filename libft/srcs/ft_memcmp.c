@@ -3,28 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrigalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 17:47:51 by dtrigalo          #+#    #+#             */
-/*   Updated: 2018/11/08 17:21:27 by dtrigalo         ###   ########.fr       */
+/*   Created: 2018/11/09 19:29:30 by anleclab          #+#    #+#             */
+/*   Updated: 2019/04/04 12:24:47 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+** Returns true if the value of n bits of s1 and s2 are equal, false otherwise.
+*/
 int		ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	const unsigned char		*ps1;
-	const unsigned char		*ps2;
+	int		is_different;
+	size_t	i;
 
-	ps1 = s1;
-	ps2 = s2;
-	while (n--)
-	{
-		if (*ps1 != *ps2)
-			return (*ps1 - *ps2);
-		ps1++;
-		ps2++;
-	}
-	return ((int)0);
+	is_different = 0;
+	i = -1;
+	while (!is_different && ++i < n)
+		is_different = ((unsigned char *)s1)[i] - ((unsigned char *)s2)[i];
+	return (is_different);
 }

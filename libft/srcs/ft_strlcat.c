@@ -3,40 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrigalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 20:03:14 by dtrigalo          #+#    #+#             */
-/*   Updated: 2018/11/08 09:01:31 by dtrigalo         ###   ########.fr       */
+/*   Created: 2018/11/07 16:37:15 by anleclab          #+#    #+#             */
+/*   Updated: 2019/04/04 10:09:20 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+** Returns some number or another after having copied the content os src at the
+** end of dst or not.
+*/
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	size_t		n;
-	size_t		dstlen;
-	char		*pdst;
-	const char	*psrc;
+	size_t	i;
+	size_t	j;
 
-	pdst = dst;
-	psrc = src;
-	n = size;
-	while (*pdst && n--)
-		pdst++;
-	dstlen = pdst - dst;
-	n = size - dstlen;
-	if (n == 0)
-		return (dstlen + ft_strlen(src));
-	while (*psrc)
-	{
-		if (n != 1)
-		{
-			*pdst++ = *psrc;
-			n--;
-		}
-		psrc++;
-	}
-	*pdst = '\0';
-	return (dstlen + (psrc - src));
+	i = 0;
+	while (dst[i] && i < size)
+		i++;
+	j = -1;
+	while (src[++j] && size && i + j < size - 1)
+		dst[i + j] = src[j];
+	if (j)
+		dst[i + j] = 0;
+	while (src[j])
+		j++;
+	return (i + j);
 }

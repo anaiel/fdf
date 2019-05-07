@@ -6,49 +6,34 @@
 /*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 14:22:39 by anleclab          #+#    #+#             */
-/*   Updated: 2018/12/06 18:22:24 by anleclab         ###   ########.fr       */
+/*   Updated: 2019/04/04 08:57:10 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	al_nbdigit(int n)
-{
-	int		res;
-
-	res = 1;
-	n = (n < 0 ? -n : n);
-	while (n >= 10)
-	{
-		res++;
-		n /= 10;
-	}
-	return (res);
-}
-
+/*
+** Returns the string of digits representing the given int.
+*/
 char		*ft_itoa(int n)
 {
 	char	*res;
-	int		i;
 	int		len;
 
-	if (n == -2147483648)
+	if (n == INT_MIN)
 	{
-		if (!(res = ft_strdup("-2147483648")))
-			return (NULL);
+		res = ft_strdup("-2147483648");
 		return (res);
 	}
-	len = (n < 0 ? al_nbdigit(n) + 1 : al_nbdigit(n));
+	len = (n < 0 ? ft_nbdigits(n) + 1 : ft_nbdigits(n));
 	n = (n < 0 ? -n : n);
 	if (!(res = ft_strnew(len)))
 		return (NULL);
 	res[0] = (n == 0 ? '0' : '-');
-	i = len - 1;
 	while (n)
 	{
-		res[i] = '0' + n % 10;
+		res[--len] = '0' + n % 10;
 		n /= 10;
-		i--;
 	}
 	return (res);
 }

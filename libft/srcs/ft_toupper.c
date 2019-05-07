@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrigalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/08 11:36:40 by dtrigalo          #+#    #+#             */
-/*   Updated: 2018/11/08 11:40:14 by dtrigalo         ###   ########.fr       */
+/*   Created: 2018/11/07 11:23:45 by anleclab          #+#    #+#             */
+/*   Updated: 2019/04/04 12:20:17 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+** Returns c or its uppercase version if it is lowercase.
+*/
 int		ft_toupper(int c)
 {
-	if (c >= 97 && c <= 122)
-		return (c - 32);
-	return (c);
+	return ((c >= 'a' && c <= 'z') ? c - 'a' + 'A' : c);
 }

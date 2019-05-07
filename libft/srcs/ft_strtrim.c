@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrigalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 10:27:54 by dtrigalo          #+#    #+#             */
-/*   Updated: 2018/11/14 18:09:04 by dtrigalo         ###   ########.fr       */
+/*   Created: 2018/11/08 08:48:42 by anleclab          #+#    #+#             */
+/*   Updated: 2019/04/04 12:28:58 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+** Returns a new string which corresponds to the given string minus the starting
+** and ending whitespaces.
+*/
 char	*ft_strtrim(char const *s)
 {
-	size_t	start;
-	size_t	end;
+	int		len;
 
 	if (!s)
 		return (NULL);
-	start = 0;
-	end = ft_strlen(s) - 1;
-	while ((s[start] == 32 || s[start] == '\n' || s[start] == '\t') && s[start])
-		start++;
-	if (!s[start])
-		return (ft_strsub(s, 0, 0));
-	while ((s[end] == 32 || s[end] == '\n' || s[end] == '\t') && s[end])
-		end--;
-	return (ft_strsub(s, start, end - start + 1));
+	while (*s && ft_iswhitespace(*s))
+		s++;
+	len = ft_strlen(s);
+	while (ft_iswhitespace(s[--len]))
+		;
+	return (ft_strsub(s, 0, ft_strlen(s) - len));
 }

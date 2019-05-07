@@ -3,26 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrigalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 17:39:44 by dtrigalo          #+#    #+#             */
-/*   Updated: 2018/11/14 12:29:28 by dtrigalo         ###   ########.fr       */
+/*   Created: 2018/11/09 19:24:30 by anleclab          #+#    #+#             */
+/*   Updated: 2019/04/04 09:05:58 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+** Returns a pointer to the first occurence of c in s or NULL if c does not
+** occur.
+*/
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	unsigned long	i;
-	unsigned char	*tmp;
+	size_t	i;
 
+	if (!s)
+		return (NULL);
 	i = -1;
-	tmp = (unsigned char *)s;
 	while (++i < n)
-	{
-		if (tmp[i] == (unsigned char)c)
+		if (((unsigned char *)s)[i] == (unsigned char)c)
 			return ((void *)(s + i));
-	}
 	return (NULL);
 }

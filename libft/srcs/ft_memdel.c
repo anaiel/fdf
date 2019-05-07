@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrigalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 09:18:32 by dtrigalo          #+#    #+#             */
-/*   Updated: 2019/01/29 12:30:43 by anleclab         ###   ########.fr       */
+/*   Created: 2018/11/09 19:40:36 by anleclab          #+#    #+#             */
+/*   Updated: 2019/04/04 09:06:22 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
+/*
+** Frees the pointer and sets it to NULL.
+*/
 void	ft_memdel(void **ap)
 {
-	if (ap)
-	{
-		free(*ap);
-		*ap = NULL;
-	}
+	if (!ap)
+		return ;
+	free(*ap);
+	*ap = NULL;
 }

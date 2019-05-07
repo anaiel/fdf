@@ -3,20 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrigalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/08 09:06:04 by dtrigalo          #+#    #+#             */
-/*   Updated: 2018/11/08 09:21:51 by dtrigalo         ###   ########.fr       */
+/*   Created: 2018/11/07 17:03:18 by anleclab          #+#    #+#             */
+/*   Updated: 2019/04/04 12:25:34 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+** Returns a pointer to the first occurence of c in s, or NULL is c does not
+** occur.
+*/
 char	*ft_strchr(const char *s, int c)
 {
-	while (*s && *s != (char)c)
+	while (*s && *s != c)
 		s++;
-	if (*s == (char)c || (!(*s) && !c))
+	if (*s == c)
 		return ((char *)s);
-	return (NULL);
+	else
+		return (NULL);
 }

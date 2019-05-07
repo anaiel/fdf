@@ -6,17 +6,13 @@
 #    By: dtrigalo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/07 17:58:51 by dtrigalo          #+#    #+#              #
-#    Updated: 2019/02/08 14:10:31 by anleclab         ###   ########.fr        #
+#    Updated: 2019/05/07 18:50:35 by anleclab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
 CFLAGS = -Wall -Wextra -Werror 
-
-MAGENTA = \033[0;35m
-CYAN = \033[0;36m
-NC = \033[0m
 
 SRC = 	gradient.c \
 		mouse.c \
@@ -35,42 +31,56 @@ SRC = 	gradient.c \
 		apply_colors.c \
 		tools.c \
 		draw_point.c
-
 SRCSFD = srcs/
 OBJSFD = objs/
 OBJS = $(addprefix $(OBJSFD),$(SRC:.c=.o))
 
-HDR = -I./includes
+HDR = fdf.h
+HDRSFD = includes/
+HDRS = $(addprefix $(HDRSFD), $(HDR))
+
+HDR_INC = -I./includes
 LIBFT_HDR = -I./libft/includes
 LIB_BINARY = -L./libft -lft
 LIBFT= libft/libft.a
 
 MLX = -I /usr/local/include -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
 
-all: $(NAME)
+RED = \033[0;31m
+GREEN = \033[0;32m
+NONE = \033[0m
 
-$(NAME): $(OBJSFD) $(OBJS)
+all: check_libft project $(NAME)
+
+check_libft:
+	@echo "Checking libft..."
 	@make -C libft
-	@echo "$(CYAN)\nCompiling $@...$(NC)"
-	@gcc $(FLAGS) $(MLX) $(OBJS) $(LIB_BINARY) -o $@
-	@echo "$(CYAN)$@ is ready$(NC)"
+
+project:
+	@echo "Checking project..."
 
 $(OBJSFD):
 	@mkdir $@
+	@echo "\t[ $(GREEN)✔$(NONE) ] $(OBJSFD) directory"
 
-$(OBJSFD)%.o: $(SRCSFD)%.c
-	@gcc $(CFLAGS) $(HDR) $(LIBFT_HDR) -c $< -o $@
+$(OBJSFD)%.o: $(SRCSFD)%.c $(HDRS) $(LIBFT)
+	@gcc $(CFLAGS) $(HDR_INC) $(LIBFT_HDR) -c $< -o $@
+	@echo "\t[ $(GREEN)✔$(NONE) ] $@ object"
+
+$(NAME): $(OBJSFD) $(OBJS) $(LIBFT) $(HDRS)
+	@gcc $(CFLAGS) $(OBJS) $(MLX) $(LIB_BINARY) -o $@
+	@echo "\t[ \033[0;32m✔\033[0m ] $(NAME) executable"
 
 clean:
-	@echo "$(MAGENTA)\nDeleting object files...$(NC)"
-	@rm -rf $(OBJSFD)
+	@/bin/rm -rf $(OBJSFD)
+	@echo "\t[ $(RED)✗$(NONE) ] $(OBJSFD) directory"
 	@make -C ./libft clean
 
 fclean: clean
-	@echo "$(MAGENTA)\nDeleting executable...$(NC)"
-	@/bin/rm -f $(NAME)
+	@/bin/rm -rf $(NAME)
+	@echo "\t[ $(RED)✗$(NONE) ] $(NAME) executable"
 	@make -C ./libft fclean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: check_libft project clean fclean re

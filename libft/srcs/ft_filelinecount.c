@@ -6,39 +6,32 @@
 /*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 09:18:47 by anleclab          #+#    #+#             */
-/*   Updated: 2019/01/28 20:26:49 by anleclab         ###   ########.fr       */
+/*   Updated: 2019/04/04 08:54:47 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <unistd.h>
-#include <fcntl.h>
 
-int		ft_filelinecount(char *path)
+/*
+** Returns the number of line of the file.
+*/
+int		ft_filelinecount(int fd)
 {
 	int		nblines;
-	int		readchar;
-	char	buf[4097];
+	int		rval;
+	char	buf[BUFF_SIZE + 1];
 	int		i;
-	int		fd;
 
-	if ((fd = open(path, O_RDONLY)) == -1)
-		return (-1);
+	if ((rval = read(fd, buf, BUFF_SIZE)) <= 0)
+		return (0);
+	buf[rval] = 0;
 	nblines = 1;
-	while ((readchar = read(fd, buf, 4096)) > 0)
+	while (rval > 0)
 	{
-		buf[readchar] = 0;
-		i = 0;
-		while (i < readchar)
-		{
-			if (buf[i] == '\n')
-			{
-				i = (i == readchar - 1) ? 2147483 : i;
-				nblines++;
-			}
-			i++;
-		}
+		i = -1;
+		while (buf[++i])
+			nblines += (buf[i] == '\n');
+		rval = read(fd, buf, BUFF_SIZE);
 	}
-	close(fd);
-	return ((i == 2147484) ? nblines - 1 : nblines);
+	return (nblines);
 }

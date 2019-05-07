@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrigalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 19:02:56 by dtrigalo          #+#    #+#             */
-/*   Updated: 2018/11/14 17:36:27 by dtrigalo         ###   ########.fr       */
+/*   Created: 2018/11/07 15:53:16 by anleclab          #+#    #+#             */
+/*   Updated: 2019/04/04 09:58:14 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
+/*
+** Copies the content of src on dst.
+*/
 char	*ft_strcpy(char *dst, const char *src)
 {
-	char	*res;
+	int		i;
 
-	res = dst;
-	while (*src)
-		*dst++ = *src++;
-	*dst = '\0';
-	return (res);
+	i = -1;
+	while (src[++i])
+		dst[i] = src[i];
+	dst[i] = src[i];
+	return (dst);
 }

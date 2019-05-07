@@ -3,31 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrigalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 10:08:17 by dtrigalo          #+#    #+#             */
-/*   Updated: 2018/11/14 16:14:13 by dtrigalo         ###   ########.fr       */
+/*   Created: 2018/11/14 14:31:49 by anleclab          #+#    #+#             */
+/*   Updated: 2019/04/04 12:29:41 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+** Writes the given int in the given file descriptor.
+*/
 void	ft_putnbr_fd(int n, int fd)
 {
-	unsigned int	m;
+	int		pow;
+	char	digit;
 
-	if (n < 0)
-	{
-		ft_putchar_fd('-', fd);
-		m = -n;
-	}
-	else
-		m = n;
-	if (m < 10)
-		ft_putchar_fd((m + 48), fd);
+	if (n == INT_MIN)
+		ft_putstr_fd("-2147483648", fd);
+	else if (n == 0)
+		ft_putchar_fd('0', fd);
 	else
 	{
-		ft_putnbr_fd((m / 10), fd);
-		ft_putnbr_fd((m % 10), fd);
+		if (n < 0)
+		{
+			ft_putchar_fd('-', fd);
+			n *= -1;
+		}
+		pow = 1;
+		while (n / pow >= 10)
+			pow *= 10;
+		while (pow)
+		{
+			digit = n / pow + '0';
+			ft_putchar_fd(digit, fd);
+			n = n % pow;
+			pow /= 10;
+		}
 	}
 }

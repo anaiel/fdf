@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrigalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/08 11:18:40 by dtrigalo          #+#    #+#             */
-/*   Updated: 2018/11/08 11:45:04 by dtrigalo         ###   ########.fr       */
+/*   Created: 2018/11/07 10:39:26 by anleclab          #+#    #+#             */
+/*   Updated: 2019/04/04 08:55:11 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+** Returns true if the character is within the ASCII range, false otherwise.
+*/
 int		ft_isascii(int c)
 {
-	if (c >= 0 && c <= 127)
-		return (1);
-	return (0);
+	return ((c >= 0 && c <= 127));
 }

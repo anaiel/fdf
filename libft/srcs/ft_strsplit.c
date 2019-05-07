@@ -3,87 +3,74 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrigalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 10:17:43 by dtrigalo          #+#    #+#             */
-/*   Updated: 2019/01/13 16:05:38 by dtrigalo         ###   ########.fr       */
+/*   Created: 2018/11/08 09:06:03 by anleclab          #+#    #+#             */
+/*   Updated: 2019/04/04 12:29:23 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-static unsigned int	ft_countinstr_noconsecbis(char *s, char c)
+static int	nb_words(char const *s, char c)
 {
-	unsigned int	cnt;
+	int		res;
 
-	if (!*s)
-		return (0);
-	cnt = 0;
-	if (*s != c)
-		++cnt;
-	while (*++s)
-		if (*s == c && *(s - 1) != c)
-			cnt++;
-	return (cnt);
-}
-
-static int			ft_parts(const char *s, char c)
-{
-	int		cp;
-	int		in;
-
-	in = 0;
-	cp = 0;
+	res = 0;
 	while (*s)
-	{
-		if (in == 1 && *s == c)
-			in = 0;
-		if (in == 0 && *s != c)
-		{
-			in = 1;
-			cp++;
-		}
-		s++;
-	}
-	return (cp);
-}
-
-static int			ft_len(const char *s, char c)
-{
-	int		len;
-
-	len = 0;
-	while (*s != c && *s != '\0')
-	{
-		len++;
-		s++;
-	}
-	return (len);
-}
-
-char				**ft_strsplit(char const *s, char c)
-{
-	char	**tab;
-	int		nb_wrd;
-	int		i;
-
-	if (!s || !c)
-		return (NULL);
-	if (!(tab = (char **)malloc(sizeof(char *) *
-					(ft_countinstr_noconsecbis((char *)s, c) + 1))))
-		return (NULL);
-	i = 0;
-	nb_wrd = ft_parts(s, c);
-	while (nb_wrd--)
-	{
-		while (*s == c && *s != '\0')
+		if (*s == c)
 			s++;
-		tab[i] = ft_strsub(s, 0, ft_len(s, c));
-		if (tab[i++] == NULL)
-			return (NULL);
-		s += ft_len(s, c);
-	}
-	tab[i] = NULL;
-	return (tab);
+		else
+		{
+			res++;
+			while (*s && *s != c)
+				s++;
+		}
+	return (res);
+}
+
+static int	word_len(char const *s, char c)
+{
+	int		res;
+
+	res = 0;
+	while (s[res] && s[res] != c)
+		res++;
+	return (res);
+}
+
+/*
+** Returns an NULL terminated array of strings which are the differents parts
+** of the given string when split with character c.
+*/
+char		**ft_strsplit(char const *s, char c)
+{
+	int		nbwords;
+	int		count;
+	char	**res;
+
+	if (!s)
+		return (NULL);
+	nbwords = nb_words(s, c);
+	if (!(res = (char **)malloc(sizeof(char *) * (nbwords + 1))))
+		return (NULL);
+	count = -1;
+	while (*s)
+		if (*s == c)
+			s++;
+		else
+		{
+			if (!(res[++count] = ft_strnew(word_len(s, c))))
+			{
+				while (--count >= 0)
+					free(res[count]);
+				free(res);
+				return (NULL);
+			}
+			ft_strncpy(res[count], s, word_len(s, c));
+			while (*s && *s != c)
+				s++;
+		}
+	res[++count] = NULL;
+	return (res);
 }

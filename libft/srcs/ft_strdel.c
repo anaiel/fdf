@@ -3,18 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrigalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 10:09:25 by dtrigalo          #+#    #+#             */
-/*   Updated: 2018/11/15 18:24:50 by dtrigalo         ###   ########.fr       */
+/*   Created: 2018/11/07 13:27:58 by anleclab          #+#    #+#             */
+/*   Updated: 2019/04/04 09:59:00 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+** Frees the string and sets the pointer to NULL.
+*/
 void	ft_strdel(char **as)
 {
 	if (!as)
 		return ;
-	ft_memdel((void **)as);
+	free(*as);
+	*as = NULL;
 }

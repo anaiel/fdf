@@ -3,26 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrigalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 19:11:45 by dtrigalo          #+#    #+#             */
-/*   Updated: 2018/11/14 18:53:34 by dtrigalo         ###   ########.fr       */
+/*   Created: 2018/11/07 15:58:19 by anleclab          #+#    #+#             */
+/*   Updated: 2019/04/04 10:15:54 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+** Copies the n first characters of src on dst.
+*/
 char	*ft_strncpy(char *dst, const char *src, size_t len)
 {
-	size_t		i;
+	size_t	i;
 
 	i = 0;
-	while (src[i] && i < len)
+	if (!src && !dst)
+		return (dst);
+	else
 	{
-		dst[i] = src[i];
-		i++;
+		while (src[i] && i < len)
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		while (i < len)
+		{
+			dst[i] = '\0';
+			i++;
+		}
 	}
-	while (i < len)
-		dst[i++] = '\0';
 	return (dst);
 }

@@ -3,17 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrigalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 10:08:34 by dtrigalo          #+#    #+#             */
-/*   Updated: 2018/11/14 18:31:15 by dtrigalo         ###   ########.fr       */
+/*   Created: 2018/11/07 12:08:22 by anleclab          #+#    #+#             */
+/*   Updated: 2019/04/04 09:25:33 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr(char const *str)
+/*
+** Writes the string on the standard output.
+*/
+void	ft_putstr(char const *s)
 {
-	if (str)
-		ft_putstr_fd(str, 1);
+	if (!s)
+		return ;
+	write(1, s, ft_strlen(s));
 }

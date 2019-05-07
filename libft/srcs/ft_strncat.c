@@ -3,24 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrigalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 19:43:11 by dtrigalo          #+#    #+#             */
-/*   Updated: 2018/11/14 16:55:04 by dtrigalo         ###   ########.fr       */
+/*   Created: 2018/11/07 16:27:57 by anleclab          #+#    #+#             */
+/*   Updated: 2019/04/04 10:14:47 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strncat(char *s1, const char *s2, size_t n)
+/*
+** Copies n characters of s2 at the end of s1.
+*/
+char	*ft_strncat(char *s1, char *s2, size_t n)
 {
-	char	*res;
+	size_t	i;
+	size_t	j;
 
-	res = s1;
-	while (*s1)
-		s1++;
-	while (*s2 && n--)
-		*s1++ = *s2++;
-	*s1 = '\0';
-	return (res);
+	i = 0;
+	j = ft_strlen(s1);
+	while (i < n && s2[i])
+	{
+		s1[j + i] = s2[i];
+		i++;
+	}
+	s1[j + i] = '\0';
+	return (s1);
 }

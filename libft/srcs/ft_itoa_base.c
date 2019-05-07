@@ -3,62 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrigalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/06 12:23:45 by dtrigalo          #+#    #+#             */
-/*   Updated: 2018/12/06 12:23:46 by dtrigalo         ###   ########.fr       */
+/*   Created: 2019/01/02 11:39:22 by anleclab          #+#    #+#             */
+/*   Updated: 2019/04/04 12:38:36 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-static int		base_len(unsigned long long int n, int base)
+static void	init_base(char *base)
 {
 	int		i;
 
-	i = 0;
-	while (n > 0)
+	i = -1;
+	while (++i < 10)
+		base[i] = i;
+	while (i < 16)
 	{
-		n /= base;
+		base[i] = i - 10 + 'A';
 		i++;
 	}
-	return (i);
+	base[16] = 0;
 }
 
-static char		convert_letter(int n)
+/*
+** Returns a string containing the conversion of n in the given base. Ignores
+** the sign of n.
+*/
+char		*ft_itoa_base(int n, int base)
 {
-	if (n == 10)
-		return ('a');
-	if (n == 11)
-		return ('b');
-	if (n == 12)
-		return ('c');
-	if (n == 13)
-		return ('d');
-	if (n == 14)
-		return ('e');
-	if (n == 15)
-		return ('f');
-	return (n + 48);
-}
+	char			charbase[17];
+	char			*res;
+	unsigned int	unsigned_n;
+	int				nbdigits;
 
-char			*ft_itoa_base(unsigned long long int n, int base)
-{
-	int		i;
-	char	*res;
-
-	if (n == -0)
-		return (ft_strdup("0"));
-	if (!(res = ft_strnew(base_len(n, base))))
+	if (base < 2 || base > 16)
 		return (NULL);
-	i = base_len(n, base);
-	res[i--] = 0;
-	while (n > 0)
+	init_base(charbase);
+	unsigned_n = (n < 0) ? -n : n;
+	nbdigits = ft_nbdigits_base(unsigned_n, base);
+	if (!(res = ft_strnew(nbdigits)))
+		return (NULL);
+	while (--nbdigits)
 	{
-		res[i] = convert_letter(n % base);
-		n /= base;
-		i--;
+		res[nbdigits] = charbase[unsigned_n % base];
+		unsigned_n /= base;
 	}
 	return (res);
 }

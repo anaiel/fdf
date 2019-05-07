@@ -3,132 +3,135 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dtrigalo <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: anaiel <anaiel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/11/07 09:24:35 by dtrigalo          #+#    #+#              #
-#    Updated: 2019/02/08 11:27:18 by dtrigalo         ###   ########.fr        #
+#    Created: 2018/11/06 17:19:55 by anleclab          #+#    #+#              #
+#    Updated: 2019/05/07 18:44:09 by anleclab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-FLAGS = -Wall -Werror -Wextra
+CC = gcc
+CFLAGS = -Wall -Werror -Wextra
 
-CYAN = \033[0;36m
-MAGENTA = \033[0;35m
-NC = \033[0m
+SRC_DIR = srcs/
+SRC_NAMES = ft_memset.c \
+	  ft_bzero.c \
+	  ft_memcpy.c \
+	  ft_memccpy.c \
+	  ft_memmove.c \
+	  ft_memchr.c \
+	  ft_memcmp.c \
+	  ft_strlen.c \
+	  ft_strdup.c \
+	  ft_strcpy.c \
+	  ft_strncpy.c \
+	  ft_strcat.c \
+	  ft_strncat.c \
+	  ft_strlcat.c \
+	  ft_strchr.c \
+	  ft_strrchr.c \
+	  ft_strstr.c \
+	  ft_strnstr.c \
+	  ft_strcmp.c \
+	  ft_strncmp.c \
+	  ft_atoi.c \
+	  ft_isalpha.c \
+	  ft_iswhitespace.c \
+	  ft_isdigit.c \
+	  ft_isalnum.c \
+	  ft_isascii.c \
+	  ft_isprint.c \
+	  ft_toupper.c \
+	  ft_tolower.c \
+	  ft_memalloc.c \
+	  ft_memdel.c \
+	  ft_strnew.c \
+	  ft_strdel.c \
+	  ft_strclr.c \
+	  ft_striter.c \
+	  ft_striteri.c \
+	  ft_strmap.c \
+	  ft_strmapi.c \
+	  ft_strequ.c \
+	  ft_strnequ.c \
+	  ft_strsub.c \
+	  ft_strjoin.c \
+	  ft_strtrim.c \
+	  ft_strsplit.c \
+	  ft_itoa.c \
+	  ft_putchar.c \
+	  ft_putstr.c \
+	  ft_putendl.c \
+	  ft_putnbr.c \
+	  ft_putchar_fd.c \
+	  ft_putstr_fd.c \
+	  ft_putendl_fd.c \
+	  ft_putnbr_fd.c \
+	  ft_lstnew.c \
+	  ft_lstdelone.c \
+	  ft_lstdel.c \
+	  ft_lstadd.c \
+	  ft_lstiter.c \
+	  ft_lstmap.c \
+	  ft_lstcpy.c \
+	  ft_lstappend.c \
+	  ft_strsplitlst.c \
+	  ft_putstrarray.c \
+	  ft_putstrlst.c \
+	  ft_putfile.c \
+	  ft_filelinecount.c \
+	  ft_putwchar.c \
+	  ft_printbits.c \
+	  ft_wchar_to_bytes.c \
+	  ft_double_power.c \
+	  ft_array_swap.c \
+	  ft_itoa_base.c \
+	  ft_ldouble_power.c \
+	  ft_tabdel.c \
+	  ft_fopen.c \
+	  ft_fclose.c \
+	  ft_fgetc.c \
+	  ft_nbdigits.c \
+	  ft_nbdigits_base.c \
+	  ft_atoi_base.c
+SRCS = $(addprefix $(SRC_DIR), $(SRC_NAMES))
+OBJ_DIR = objs/
+OBJ_NAMES = $(SRC_NAMES:.c=.o)
+OBJS = $(addprefix $(OBJ_DIR), $(OBJ_NAMES))
 
-SRCS =	 	ft_abs.c \
-			ft_print_int_array.c \
-			ft_itoa_base.c	\
-			ft_atoi.c		\
-			ft_bzero.c		\
-			ft_isalnum.c	\
-			ft_isascii.c	\
-			ft_isdigit.c	\
-			ft_isalpha.c	\
-			ft_lstdel.c		\
-			ft_isprint.c	\
-			ft_lstdelone.c	\
-			ft_lstiter.c	\
-			ft_lstmap.c		\
-			ft_lstnew.c		\
-			ft_itoa.c		\
-			ft_memalloc.c	\
-			ft_memccpy.c	\
-			ft_memcmp.c		\
-			ft_memdel.c		\
-			ft_memcpy.c		\
-			ft_lstadd.c		\
-			ft_memmove.c	\
-			ft_putchar.c	\
-			ft_memset.c		\
-			ft_putchar_fd.c	\
-			ft_memchr.c		\
-			ft_putendl_fd.c	\
-			ft_putendl.c	\
-			ft_putnbr.c		\
-			ft_putnbr_fd.c	\
-			ft_putstr_fd.c	\
-			ft_putstr.c		\
-			ft_stpcpy.c		\
-			ft_strclr.c		\
-			ft_strcat.c		\
-			ft_strchr.c		\
-			ft_strdel.c		\
-			ft_strcmp.c		\
-			ft_strcpy.c		\
-			ft_strequ.c		\
-			ft_striter.c	\
-			ft_striteri.c	\
-			ft_strdup.c		\
-			ft_strlen.c		\
-			ft_strjoin.c	\
-			ft_strmap.c		\
-			ft_strmapi.c	\
-			ft_strlcat.c	\
-			ft_strncat.c	\
-			ft_strncmp.c	\
-			ft_strnequ.c	\
-			ft_strnew.c		\
-			ft_strncpy.c	\
-			ft_strnstr.c	\
-			ft_strrchr.c	\
-			ft_strsub.c		\
-			ft_strstr.c		\
-			ft_strtrim.c	\
-			ft_tolower.c	\
-			ft_toupper.c	\
-			ft_strsplit.c	\
-			ft_isspace.c	\
-			ft_isupper.c	\
-			ft_islower.c	\
-			ft_is_prime.c	\
-			ft_power.c		\
-			ft_fact.c		\
-			ft_doubletoa.c	\
-			ft_llitoa.c		\
-			ft_litoa.c		\
-			ft_putwchar.c	\
-			ft_wchar_to_bytes.c \
-			ft_double_power.c	\
-			ft_ldouble_power.c \
-			ft_filelinecount.c \
-			ft_fopen.c \
-			ft_fclose.c \
-			ft_fgetc.c \
-			ft_atoi_base.c
+HDR_NAMES = libft.h
+HDR_DIR = includes/
+HDRS = $(addprefix $(HDR_DIR),$(HDR_NAMES))
 
-SRCSFD = srcs/
-SRCS_PATH = $(addprefix $(SRCSFD),$(SRCS))
-OBJS = $(SRCS:.c=.o)
-OBJSFD = objects/
-OBJS_PATH = $(addprefix $(OBJSFD), $(OBJS))
+HDR_INC = $(addprefix -I./, $(HDR_DIR))
 
-HDR = -I./includes
+RED = \033[0;31m
+GREEN = \033[0;32m
+NONE = \033[0m
 
-all: $(NAME)
+all: $(NAME) $(HDRS)
 
-$(NAME): $(OBJSFD) $(OBJS_PATH)
-	@echo "$(CYAN)\nCompiling binary...$(NC)"
-	@ar rc $(NAME) $(OBJS_PATH)
-	@ranlib $(NAME)
-	@echo "$(CYAN)libft.a is created$(NC)"
+$(NAME): $(OBJ_DIR) $(OBJS) $(HDRS)
+	@ar rc $@ $(OBJS)
+	@ranlib $@
+	@echo "\t[ $(GREEN)✔$(NONE) ] libft/libft.a library"
 
-$(OBJSFD):
+$(OBJ_DIR):
 	@mkdir $@
 
-$(OBJSFD)%.o: $(SRCSFD)%.c
-	@gcc $(FLAGS) $(HDR) -c $< -o $@
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HDRS)
+	@$(CC) $(CFLAGS) $(HDR_INC) -c $< -o $@
 
 clean:
-	@echo "$(MAGENTA)\nDeleting libft object files...$(NC)"
-	@rm -Rf $(OBJSFD)
+	@rm -Rf $(OBJ_DIR)
+	@echo "\t[ $(RED)✗$(NONE) ] libft/$(OBJ_DIR) directory"
 
 fclean: clean
-	@echo "$(MAGENTA)\nDeleting the library...$(NC)"
-	@/bin/rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo "\t[ $(RED)✗$(NONE) ] libft/$(NAME) library"
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re project

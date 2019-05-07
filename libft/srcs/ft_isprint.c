@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrigalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/08 11:31:42 by dtrigalo          #+#    #+#             */
-/*   Updated: 2018/11/18 10:34:38 by dtrigalo         ###   ########.fr       */
+/*   Created: 2018/11/07 10:59:13 by anleclab          #+#    #+#             */
+/*   Updated: 2019/04/04 08:55:21 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+** Returns true if the character is printable, false otherwise.
+*/
 int		ft_isprint(int c)
 {
-	if (c >= 32 && c <= 126)
-		return (1);
-	return (0);
+	return ((c >= 32 && c <= 126));
 }

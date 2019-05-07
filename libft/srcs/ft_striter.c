@@ -3,24 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrigalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 10:09:59 by dtrigalo          #+#    #+#             */
-/*   Updated: 2018/11/14 19:28:50 by dtrigalo         ###   ########.fr       */
+/*   Created: 2018/11/07 13:40:06 by anleclab          #+#    #+#             */
+/*   Updated: 2019/04/04 10:03:44 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+** Applies the function to every character of the string.
+*/
 void	ft_striter(char *s, void (*f)(char *))
 {
-	int	i;
-
-	i = 0;
-	if (s && f)
+	if (!s || !f)
+		return ;
+	while (*s)
 	{
-		while (s[i])
-		{
-			f(s + i);
-			i++;
-		}
+		f(s);
+		s++;
 	}
 }

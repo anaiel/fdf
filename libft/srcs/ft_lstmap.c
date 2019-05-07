@@ -3,25 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrigalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 09:52:54 by dtrigalo          #+#    #+#             */
-/*   Updated: 2018/11/18 10:37:51 by dtrigalo         ###   ########.fr       */
+/*   Created: 2018/11/12 17:57:19 by anleclab          #+#    #+#             */
+/*   Updated: 2019/04/04 12:34:27 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
+/*
+** Returns a new chained list composed of links which are copies of the links
+** in the original list to which is applied the function.
+*/
+t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	t_list		*res;
+	t_list *map_lst;
 
-	if (lst && f)
+	map_lst = NULL;
+	while (lst)
 	{
-		res = f(lst);
-		if (res && lst->next)
-			res->next = ft_lstmap(lst->next, f);
-		return (res);
+		ft_lstappend(&map_lst, f(lst));
+		lst = lst->next;
 	}
-	return (NULL);
+	return (map_lst);
 }

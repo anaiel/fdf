@@ -5,13 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/23 19:04:02 by anleclab          #+#    #+#             */
-/*   Updated: 2018/12/23 19:04:54 by anleclab         ###   ########.fr       */
+/*   Created: 2018/12/19 16:12:01 by anleclab          #+#    #+#             */
+/*   Updated: 2019/04/04 12:35:29 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <wchar.h>
-#include <unistd.h>
+#include "libft.h"
 
 static void	ft_putwchar_4bytes(wchar_t c)
 {
@@ -49,23 +48,18 @@ static void	ft_putwchar_2bytes(wchar_t c)
 	write(1, &byte, 1);
 }
 
+/*
+** Writes a wide char on the standard ouput.
+*/
 int			ft_putwchar(wchar_t c)
 {
-	if (c & 2031616)
-	{
+	if (c & UTF_4BYTES_MASK)
 		ft_putwchar_4bytes(c);
-		return (4);
-	}
-	else if (c & 63488)
-	{
+	else if (c & UTF_3BYTES_MASK)
 		ft_putwchar_3bytes(c);
-		return (3);
-	}
-	else if (c & 1920)
-	{
+	else if (c & UTF_2BYTES_MASK)
 		ft_putwchar_2bytes(c);
-		return (2);
-	}
-	write(1, &c, 1);
+	else
+		ft_putchar(c);
 	return (1);
 }

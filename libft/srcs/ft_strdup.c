@@ -3,30 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrigalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 18:50:04 by dtrigalo          #+#    #+#             */
-/*   Updated: 2018/11/18 10:48:09 by dtrigalo         ###   ########.fr       */
+/*   Created: 2018/11/07 15:47:38 by anleclab          #+#    #+#             */
+/*   Updated: 2019/04/04 10:00:52 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
+/*
+** Returns a new string similas to s1.
+*/
 char	*ft_strdup(const char *s1)
 {
-	char	*dst;
+	char	*res;
 	int		i;
-	int		size;
 
-	size = -1;
-	i = -1;
-	while (s1[++size])
-		;
-	if (!(dst = malloc(sizeof(char) * (size + 1))))
+	if (!s1 || !(res = ft_strnew(ft_strlen(s1))))
 		return (NULL);
+	i = -1;
 	while (s1[++i])
-		dst[i] = s1[i];
-	dst[i] = '\0';
-	return (dst);
+		res[i] = s1[i];
+	return (res);
 }

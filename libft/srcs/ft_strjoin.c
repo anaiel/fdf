@@ -3,25 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrigalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 10:10:19 by dtrigalo          #+#    #+#             */
-/*   Updated: 2018/11/18 10:48:29 by dtrigalo         ###   ########.fr       */
+/*   Created: 2018/11/08 08:37:24 by anleclab          #+#    #+#             */
+/*   Updated: 2019/04/04 10:07:22 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
+/*
+** Returns a new string which is the result of the concatenation of s1 and s2.
+*/
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*str;
+	char	*res;
 
-	if (!s1 || !s2)
+	if (!s1 && !s2)
 		return (NULL);
-	if (!(str = (char *)malloc(sizeof(char)
-		* (ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1))))
+	if (!s1)
+		return (ft_strdup(s2));
+	if (!s2)
+		return (ft_strdup(s1));
+	if (!(res = ft_strnew(ft_strlen(s1) + ft_strlen(s2))))
 		return (NULL);
-	ft_stpcpy(ft_stpcpy(str, s1), s2);
-	return (str);
+	ft_strcpy(res, s1);
+	ft_strcat(res, s2);
+	return (res);
 }

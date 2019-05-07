@@ -6,7 +6,7 @@
 /*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 17:51:55 by anleclab          #+#    #+#             */
-/*   Updated: 2019/02/08 16:02:22 by anleclab         ###   ########.fr       */
+/*   Updated: 2019/05/07 18:41:31 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,23 @@ static int	get_width(char *file_name)
 			t = ft_fgetc(stream);
 		if (!is_valid_mapchar(t))
 		{
-			ft_fclose(stream);
+			ft_fclose(&stream);
 			return (-1);
 		}
 	}
-	ft_fclose(stream);
+	ft_fclose(&stream);
 	return (res);
 }
 
 static void	init_map_info_extra(t_fdf *fdf, char *file_path)
 {
-	if ((fdf->depth = ft_filelinecount(file_path)) == -1)
+	int		fd;
+
+	if ((fd = open(file_path, O_RDONLY)) == -1)
+		exit(0);
+	if ((fdf->depth = ft_filelinecount(fd)) == -1)
 		error("error: invalid file", NULL);
+	close(fd);
 	if ((fdf->width = get_width(file_path)) == -1)
 		error("error: invalid file", NULL);
 	if (fdf->depth == 0 || fdf->width == 0)

@@ -3,21 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrigalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 18:26:33 by dtrigalo          #+#    #+#             */
-/*   Updated: 2018/12/05 16:56:20 by anleclab         ###   ########.fr       */
+/*   Created: 2018/11/07 11:46:49 by anleclab          #+#    #+#             */
+/*   Updated: 2019/04/04 10:10:14 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t		ft_strlen(const char *s)
+/*
+** Returns the number of characters in the string.
+*/
+size_t	ft_strlen(const char *s)
 {
 	size_t	len;
 
-	len = -1;
-	while (s[++len])
-		;
+	len = 0;
+	while (s[len])
+		len++;
 	return (len);
 }

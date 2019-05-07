@@ -3,25 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrigalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 16:19:46 by dtrigalo          #+#    #+#             */
-/*   Updated: 2018/11/14 17:36:32 by dtrigalo         ###   ########.fr       */
+/*   Created: 2018/11/09 19:00:11 by anleclab          #+#    #+#             */
+/*   Updated: 2019/04/04 09:08:09 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+** Copies len bits of src to dst. Protected against overlapping.
+*/
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	void	*str;
+	int		i;
+	char	*d;
+	char	*s;
 
-	str = dst;
+	i = -1;
+	d = (char *)dst;
+	s = (char *)src;
 	if (dst < src)
-		while ((size_t)(dst - str) < len)
-			*(char *)dst++ = *(char *)src++;
+	{
+		while (++i < (int)len)
+			*(d++) = *(s++);
+	}
 	else
-		while (len-- > 0)
-			((char *)dst)[len] = ((char *)src)[len];
-	return (str);
+	{
+		d += len - 1;
+		s += len - 1;
+		while (++i < (int)len)
+			*(d--) = *(s--);
+	}
+	return (dst);
 }

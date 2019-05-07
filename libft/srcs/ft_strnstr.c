@@ -3,27 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrigalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/08 09:49:49 by dtrigalo          #+#    #+#             */
-/*   Updated: 2018/11/14 14:09:57 by dtrigalo         ###   ########.fr       */
+/*   Created: 2018/11/07 17:29:02 by anleclab          #+#    #+#             */
+/*   Updated: 2019/04/04 10:21:36 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+** Returns a pointer to the first occurence of the needle in the haystack, or
+** NULL if the needle does not occur.
+*/
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	size_t	ndllen;
+	size_t	lh;
+	size_t	ln;
+	size_t	i;
 
-	if (!(*needle))
+	if (!*needle)
 		return ((char *)haystack);
-	ndllen = ft_strlen(needle);
-	while (*haystack && len-- >= ndllen)
-	{
-		if (*haystack == *needle && ft_memcmp(haystack, needle, ndllen) == 0)
-			return ((char *)haystack);
-		haystack++;
-	}
+	lh = ft_strlen(haystack);
+	ln = ft_strlen(needle);
+	i = -1;
+	while (++i < len && ln + i <= lh)
+		if (ft_strnequ(haystack + i, needle, ln) && i + ln <= len)
+			return ((char *)(haystack + i));
 	return (NULL);
 }

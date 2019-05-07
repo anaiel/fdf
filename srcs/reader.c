@@ -6,7 +6,7 @@
 /*   By: anleclab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 14:03:04 by anleclab          #+#    #+#             */
-/*   Updated: 2019/02/08 15:32:56 by anleclab         ###   ########.fr       */
+/*   Updated: 2019/05/07 18:41:59 by anleclab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int			reader(char *file_name, t_fdf *fdf)
 			fdf->proj[i][j].color = 0xFFFFFF;
 			if (!get_alt(fdf, j, i, stream))
 			{
-				ft_fclose(stream);
+				ft_fclose(&stream);
 				return (0);
 			}
 			if (i == 0 && j == 0)
@@ -115,6 +115,6 @@ int			reader(char *file_name, t_fdf *fdf)
 		}
 	while ((i = ft_fgetc(stream)) == ' ' || i == '\t' || i == '\n')
 		;
-	ft_fclose(stream);
+	ft_fclose(&stream);
 	return ((i != -1) ? 0 : 1);
 }
